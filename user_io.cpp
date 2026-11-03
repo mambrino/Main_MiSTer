@@ -2145,6 +2145,7 @@ int process_ss(const char *rom_name, int enable)
 					*ss_sufx = i + '1';
 					int ret = FileSave(ss_name, base[i], size);
 					if (ret) printf("Wrote %d bytes to file: %s\n", ret, ss_name);
+					{ char dbg[300]; int l = strlen(ss_name); snprintf(dbg, sizeof(dbg), "SS ret=%d ...%s", ret, ss_name + (l > 40 ? l - 40 : 0)); Info(dbg, 6000); }
 				}
 			}
 		}
