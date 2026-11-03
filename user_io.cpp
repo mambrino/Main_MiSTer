@@ -2387,6 +2387,10 @@ int user_io_file_mount(const char *name, unsigned char index, char pre, int pre_
 			}
 			user_io_store_filename(name); // name screenshots after the loaded disk
 		}
+		else if ((is_c64() || is_c128()) && ss_base && !index)
+   		{
+   			process_ss(name); // per-game savestates named after the disk in drive 8
+   		}
 		printf("Mount %s as %s on %d slot\n", name, writable ? "read-write" : "read-only", index);
 	}
 
