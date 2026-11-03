@@ -1,0 +1,20 @@
+name: Build MiSTer
+on: workflow_dispatch
+jobs:
+  build:
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          submodules: recursive
+      - name: Toolchain ARM (el que usa MiSTer)
+        run: |
+          wget -q "https://developer.arm.com/-/media/Files/downloads/gnu-a/10.2-2020.11/binrel/gcc-arm-10.2-2020.11-x86_64-arm-none-linux-gnueabihf.tar.xz" -O tc.tar.xz
+          tar xf tc.tar.xz
+          echo "$PWD/gcc-arm-10.2-2020.11-x86_64-arm-none-linux-gnueabihf/bin" >> $GITHUB_PATH
+      - name: Compilar
+        run: make -j$(nproc)
+      - uses: actions/upload-artifact@v5
+        with:
+          name: MiSTer
+          path: bin/MiSTer
