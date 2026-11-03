@@ -2134,7 +2134,6 @@ int process_ss(const char *rom_name, int enable)
 
 			if (curcnt != ss_cnt[i])
 			{
-				{ char dbg[100]; snprintf(dbg, sizeof(dbg), "SS slot%d cnt=%u size=%u", i + 1, curcnt, size); Info(dbg, 3000); }
 				ss_cnt[i] = curcnt;
 				if (size) size = (size + 2) * 4;
 				if (size > 0 && size <= ss_size)
@@ -2145,7 +2144,6 @@ int process_ss(const char *rom_name, int enable)
 					*ss_sufx = i + '1';
 					int ret = FileSave(ss_name, base[i], size);
 					if (ret) printf("Wrote %d bytes to file: %s\n", ret, ss_name);
-					{ char dbg[300]; int l = strlen(ss_name); snprintf(dbg, sizeof(dbg), "SS ret=%d ...%s", ret, ss_name + (l > 40 ? l - 40 : 0)); Info(dbg, 6000); }
 				}
 			}
 		}
@@ -2392,7 +2390,6 @@ int user_io_file_mount(const char *name, unsigned char index, char pre, int pre_
 		else if ((is_c64() || is_c128()) && ss_base && !index && strchr(name, '.'))
    		{
    			process_ss(name); // per-game savestates named after the disk in drive 8
-			{ char dbg[300]; snprintf(dbg, sizeof(dbg), "SS mount idx%d: %s", index, name); Info(dbg, 4000); }
    		}
 		printf("Mount %s as %s on %d slot\n", name, writable ? "read-write" : "read-only", index);
 	}
