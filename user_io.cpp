@@ -2387,7 +2387,7 @@ int user_io_file_mount(const char *name, unsigned char index, char pre, int pre_
 			}
 			user_io_store_filename(name); // name screenshots after the loaded disk
 		}
-		else if ((is_c64() || is_c128()) && ss_base && !index)
+		else if ((is_c64() || is_c128()) && ss_base && !index && strchr(name, '.'))
    		{
    			process_ss(name); // per-game savestates named after the disk in drive 8
    		}
