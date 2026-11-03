@@ -1075,6 +1075,8 @@ static void ezfl_save(const char* name, uint8_t *buf)
 void c64_open_file(const char* name, unsigned char index)
 {
 	int slen = strlen(name);
+	// per-game savestates: name them after the loaded program/cartridge/tape (not REU images)
+   	if (slen > 4 && strcasecmp(name + slen - 4, ".reu")) process_ss(name);
 	if (slen > 4 && !strcasecmp(name + slen - 4, ".crt"))
 	{
 		ezfl_save_name = 0;
